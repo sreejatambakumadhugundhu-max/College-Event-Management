@@ -1,55 +1,28 @@
-import React, { useState } from 'react';
-import { getRegisteredEvents } from '../utils/storage.js';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar.jsx';
+import Home from './pages/Home.jsx';
+import Events from './pages/Events.jsx';
+import Registration from './pages/Registration.jsx';
+import MyEvents from './pages/MyEvents.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import Login from './pages/Login.jsx';
+import './App.css';
 
-function AdminDashboard() {
-const [registrations, setRegistrations] = useState(
-() => getRegisteredEvents()
-);
-
-const refreshRegistrations = () => {
-setRegistrations(getRegisteredEvents());
-};
-
-const clearRegistrations = () => {
-if (window.confirm('Delete all registrations?')) {
-localStorage.removeItem('registeredEvents');
-setRegistrations([]);
-}
-};
-
+function App() {
 return (
-<div className="events-section">
-<h1>Admin Dashboard</h1>
-<p>Manage and view student event registrations.</p>
-
-  <div className="event-card">
-    <h3>Total Registrations: {registrations.length}</h3>
-    <button className="register-button" onClick={refreshRegistrations}>
-      Refresh
-    </button>
-    {' '}
-    <button className="register-button" onClick={clearRegistrations}>
-      Clear Registrations
-    </button>
-  </div>
-
-  {registrations.length === 0 ? (
-    <p className="empty-message">No registrations found.</p>
-  ) : (
-    <div className="events-container">
-      {registrations.map((item, index) => (
-        <div className="event-card" key={item.id || index}>
-          <h3>{item.event || item.title}</h3>
-          <p>Name: {item.name || 'Not provided'}</p>
-          <p>Email: {item.email || 'Not provided'}</p>
-          <p>Roll Number: {item.rollNumber || 'Not provided'}</p>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
-
+<BrowserRouter>
+<Navbar />
+<Routes>
+<Route path="/" element={<Home />} />
+<Route path="/events" element={<Events />} />
+<Route path="/registration" element={<Registration />} />
+<Route path="/my-events" element={<MyEvents />} />
+<Route path="/admin" element={<AdminDashboard />} />
+<Route path="/login" element={<Login />} />
+</Routes>
+</BrowserRouter>
 );
 }
 
-export default AdminDashboard;
+export default App;
