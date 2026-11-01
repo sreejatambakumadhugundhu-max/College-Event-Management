@@ -1,89 +1,86 @@
 import React, { useState } from 'react';
+import { registerEvent } from '../utils/storage.js';
 
 function Registration() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    rollNumber: '',
-    event: ''
-  });
+const [form, setForm] = useState({
+name: '',
+email: '',
+rollNumber: '',
+event: 'Technical Fest'
+});
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+const handleChange = (e) => {
+setForm({ ...form, [e.target.name]: e.target.value });
+};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+e.preventDefault();
 
-    if (!formData.name || !formData.email ||
-        !formData.rollNumber || !formData.event) {
-      alert('Please fill in all fields.');
-      return;
-    }
+registerEvent({
+  ...form,
+  id: Date.now(),
+  registeredAt: new Date().toLocaleDateString()
+});
 
-    alert('Registration successful!');
+alert('Registration successful!');
 
-    setFormData({
-      name: '',
-      email: '',
-      rollNumber: '',
-      event: ''
-    });
-  };
+setForm({
+  name: '',
+  email: '',
+  rollNumber: '',
+  event: 'Technical Fest'
+});
 
-  return (
-    <section className="registration-section">
-      <h2>Event Registration</h2>
+};
 
-      <form onSubmit={handleSubmit} className="registration-form">
-        <label>Student Name</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter your name"
-        />
+return (
+<div className="registration-section">
+<h1>Event Registration</h1>
+<p>Fill in your details to register for an event.</p>
 
-        <label>Email Address</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-        />
+  <form className="registration-form" onSubmit={handleSubmit}>
+    <label>Full Name</label>
+    <input
+      type="text"
+      name="name"
+      value={form.name}
+      onChange={handleChange}
+      placeholder="Enter your full name"
+      required
+    />
 
-        <label>Roll Number</label>
-        <input
-          type="text"
-          name="rollNumber"
-          value={formData.rollNumber}
-          onChange={handleChange}
-          placeholder="Enter your roll number"
-        />
+    <label>Email Address</label>
+    <input
+      type="email"
+      name="email"
+      value={form.email}
+      onChange={handleChange}
+      placeholder="Enter your email"
+      required
+    />
 
-        <label>Select Event</label>
-        <select
-          name="event"
-          value={formData.event}
-          onChange={handleChange}
-        >
-          <option value="">Choose an event</option>
-          <option value="Technical Fest">Technical Fest</option>
-          <option value="Cultural Fest">Cultural Fest</option>
-          <option value="Sports Meet">Sports Meet</option>
-        </select>
+    <label>Roll Number</label>
+    <input
+      type="text"
+      name="rollNumber"
+      value={form.rollNumber}
+      onChange={handleChange}
+      placeholder="Enter your roll number"
+      required
+    />
 
-        <button type="submit" className="register-button">
-          Submit Registration
-        </button>
-      </form>
-    </section>
-  );
+    <label>Select Event</label>
+    <select name="event" value={form.event} onChange={handleChange}>
+      <option>Technical Fest</option>
+      <option>Cultural Fest</option>
+      <option>Sports Meet</option>
+    </select>
+
+    <button type="submit">Submit Registration</button>
+  </form>
+</div>
+
+);
 }
 
 export default Registration;
