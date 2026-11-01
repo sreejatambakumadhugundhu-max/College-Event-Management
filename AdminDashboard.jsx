@@ -1,69 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { getRegisteredEvents } from '../utils/storage.js';
 
 function AdminDashboard() {
-  const events = [
-    {
-      id: 1,
-      title: 'Technical Fest',
-      date: '15 November 2026',
-      category: 'Technical'
-    },
-    {
-      id: 2,
-      title: 'Cultural Fest',
-      date: '20 November 2026',
-      category: 'Cultural'
-    },
-    {
-      id: 3,
-      title: 'Sports Meet',
-      date: '25 November 2026',
-      category: 'Sports'
-    }
-  ];
+const [registrations, setRegistrations] = useState(
+() => getRegisteredEvents()
+);
 
-  const registrations = JSON.parse(
-    localStorage.getItem('registeredEvents') || '[]'
-  );
+const refreshRegistrations = () => {
+setRegistrations(getRegisteredEvents());
+};
 
-  return (
-    <section className="events-section">
-      <h2>Admin Dashboard</h2>
-      <p className="section-description">
-        Overview of college events and registrations.
-      </p>
+const clearRegistrations = () => {
+if (window.confirm('Delete all registrations?')) {
+localStorage.removeItem('registeredEvents');
+setRegistrations([]);
+}
+};
 
-      <div className="event-container">
-        <div className="event-card">
-          <div className="event-details">
-            <h3>Total Events</h3>
-            <h2>{events.length}</h2>
-          </div>
+return (
+<div className="events-section">
+<h1>Admin Dashboard</h1>
+<p>Manage and view student event registrations.</p>
+
+  <div className="event-card">
+    <h3>Total Registrations: {registrations.length}</h3>
+    <button className="register-button" onClick={refreshRegistrations}>
+      Refresh
+    </button>
+    {' '}
+    <button className="register-button" onClick={clearRegistrations}>
+      Clear Registrations
+    </button>
+  </div>
+
+  {registrations.length === 0 ? (
+    <p className="empty-message">No registrations found.</p>
+  ) : (
+    <div className="events-container">
+      {registrations.map((item, index) => (
+        <div className="event-card" key={item.id || index}>
+          <h3>{item.event || item.title}</h3>
+          <p>Name: {item.name || 'Not provided'}</p>
+          <p>Email: {item.email || 'Not provided'}</p>
+          <p>Roll Number: {item.rollNumber || 'Not provided'}</p>
         </div>
+      ))}
+    </div>
+  )}
+</div>
 
-        <div className="event-card">
-          <div className="event-details">
-            <h3>Total Registrations</h3>
-            <h2>{registrations.length}</h2>
-          </div>
-        </div>
-      </div>
-
-      <h3 style={{ marginTop: '30px' }}>Available Events</h3>
-
-      <div className="event-container">
-        {events.map((event) => (
-          <div className="event-card" key={event.id}>
-            <div className="event-details">
-              <h3>{event.title}</h3>
-              <p>{event.category}</p>
-              <p>📅 {event.date}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+);
 }
 
 export default AdminDashboard;
