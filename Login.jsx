@@ -1,49 +1,51 @@
 import React, { useState } from 'react';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+e.preventDefault();
 
-    if (!email || !password) {
-      alert('Please enter email and password.');
-      return;
-    }
+alert('Login demo submitted successfully!');
+setEmail('');
+setPassword('');
 
-    alert('Login form submitted!');
-  };
+};
 
-  return (
-    <section className="registration-section">
-      <h2>Student Login</h2>
+return (
+<div className="registration-section">
+<h1>Student Login</h1>
+<p>Enter your details to continue.</p>
 
-      <form onSubmit={handleLogin} className="registration-form">
-        <label>Email Address</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          required
-        />
+  <form className="registration-form" onSubmit={handleSubmit}>
+    <label>Email Address</label>
+    <input
+      type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="Enter your email"
+      required
+    />
 
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-          required
-        />
+    <label>Password</label>
+    <input
+      type="password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      placeholder="Enter your password"
+      required
+    />
 
-        <button type="submit" className="register-button">
-          Login
-        </button>
-      </form>
-    </section>
-  );
+    <button type="submit">Login</button>
+  </form>
+
+  <p className="empty-message">
+    Note: This is a demo login form; it does not verify accounts.
+  </p>
+</div>
+
+);
 }
 
 export default Login;
