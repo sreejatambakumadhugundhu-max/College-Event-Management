@@ -1,86 +1,221 @@
+* {
+  box-sizing: border-box;
+  }
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f9;
-  color: #333;
+margin: 0;
+font-family: Arial, sans-serif;
+background: #f4f7fb;
+color: #222;
 }
 
-.container {
-  width: 90%;
-  margin: 20px auto;
+.navbar {
+background: #142850;
+color: white;
+padding: 18px 5%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 15px;
 }
 
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 25px;
+.navbar h2 {
+margin: 0;
+font-size: 24px;
+}
+
+.nav-links {
+display: flex;
+flex-wrap: wrap;
+gap: 18px;
+}
+
+.nav-links a {
+color: white;
+text-decoration: none;
+font-weight: bold;
+}
+
+.nav-links a:hover {
+color: #ffd166;
+}
+
+.hero {
+text-align: center;
+padding: 90px 20px;
+color: white;
+background: linear-gradient(135deg, #142850, #365486);
+}
+
+.hero h1 {
+font-size: 38px;
+margin-bottom: 18px;
+}
+
+.hero p {
+font-size: 18px;
+line-height: 1.7;
+margin-bottom: 25px;
+}
+
+.hero-button,
+.register-button {
+display: inline-block;
+background: #ffb703;
+color: #142850;
+padding: 12px 20px;
+border: none;
+border-radius: 6px;
+text-decoration: none;
+font-weight: bold;
+cursor: pointer;
+}
+
+.hero-button:hover,
+.register-button:hover {
+background: #fb8500;
+color: white;
+}
+
+.about-section,
+.events-section,
+.registration-section {
+padding: 50px 6%;
+text-align: center;
+}
+
+.about-section h2,
+.events-section h1,
+.registration-section h1 {
+color: #142850;
+margin-bottom: 18px;
+}
+
+.about-section p,
+.events-section > p,
+.registration-section > p {
+line-height: 1.7;
+margin-bottom: 25px;
+}
+
+.events-container {
+display: flex;
+justify-content: center;
+align-items: stretch;
+flex-wrap: wrap;
+gap: 24px;
+margin-top: 30px;
 }
 
 .event-card {
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  transition: transform 0.3s;
+background: white;
+width: 300px;
+max-width: 100%;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+text-align: left;
 }
 
-.event-card:hover {
-  transform: translateY(-5px);
+.event-icon {
+font-size: 42px;
+margin-bottom: 12px;
 }
 
-.card-img-top {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.event-category {
+display: inline-block;
+background: #e2eaff;
+color: #142850;
+padding: 5px 10px;
+border-radius: 15px;
+font-size: 12px;
 }
 
-.card-body {
-  padding: 20px;
+.event-card h3 {
+color: #142850;
+margin: 15px 0 10px;
 }
 
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.event-card p {
+line-height: 1.6;
+margin-bottom: 12px;
 }
 
-.card-text {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #555;
+.registration-form {
+max-width: 500px;
+margin: 25px auto;
+padding: 28px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+text-align: left;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
+.registration-form label {
+display: block;
+margin: 14px 0 7px;
+font-weight: bold;
 }
 
-button:hover {
-  background-color: #0056b3;
+.registration-form input,
+.registration-form select {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 6px;
+font-size: 15px;
 }
 
-input,
-select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+.registration-form button {
+width: 100%;
+margin-top: 22px;
+padding: 13px;
+background: #142850;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+cursor: pointer;
+}
+
+.registration-form button:hover {
+background: #365486;
+}
+
+.empty-message {
+margin: 25px auto;
+color: #555;
+}
+
+footer {
+background: #142850;
+color: white;
+text-align: center;
+padding: 20px;
+margin-top: 30px;
 }
 
 @media (max-width: 600px) {
-  .container {
-    width: 95%;
-  }
+.navbar {
+flex-direction: column;
+text-align: center;
+}
 
-  .card-img-top {
-    height: 160px;
-  }
+.nav-links {
+justify-content: center;
+gap: 12px;
+}
+
+.hero {
+padding: 60px 18px;
+}
+
+.hero h1 {
+font-size: 28px;
+}
+
+.event-card {
+width: 100%;
+}
 }
